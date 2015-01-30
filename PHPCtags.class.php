@@ -160,16 +160,23 @@ class PHPCtags
             foreach ($node as $subNode) {
                 $this->struct($subNode);
             }
+        } elseif ($node instanceof PHPParser_Node_Expr_LogicalOr ) {
+            foreach ($node as $subNode) {
+                $this->struct($subNode);
+            }
+
         } elseif ($node instanceof PHPParser_Node_Stmt_Const) {
             $kind = 'd';
             $cons = $node->consts[0];
             $name = $cons->name;
             $line = $node->getLine();
         } elseif ($node instanceof PHPParser_Node_Stmt_Global) {
+            /*
             $kind = 'v';
             $prop = $node->vars[0];
             $name = $prop->name;
             $line = $node->getLine();
+            */
         } elseif ($node instanceof PHPParser_Node_Stmt_Static) {
             //@todo
         } elseif ($node instanceof PHPParser_Node_Stmt_Declare) {
